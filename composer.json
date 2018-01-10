@@ -3,6 +3,8 @@
   "description": "CompanyUser module",
   "license": "proprietary",
   "require": {
+    "spryker/company": "*",
+    "spryker/customer": "*"
   },
   "require-dev": {
     "spryker/code-sniffer": "*",
