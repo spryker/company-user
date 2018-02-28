@@ -9,17 +9,21 @@ namespace Spryker\Zed\CompanyUser\Persistence;
 
 use Generated\Shared\Transfer\CompanyUserTransfer;
 
-interface CompanyUserWriterRepositoryInterface
+interface CompanyUserEntityManagerInterface
 {
     /**
-     * Specification:
-     * - Creates a user
-     * - Finds a user by CompanyUserTransfer::idCompanyUser in the transfer
-     * - Updates fields in a company user entity
-     *
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyUserTransfer
      */
-    public function save(CompanyUserTransfer $companyUserTransfer): CompanyUserTransfer;
+    public function saveCompanyUser(
+        CompanyUserTransfer $companyUserTransfer
+    ): CompanyUserTransfer;
+
+    /**
+     * @param int $idCompanyUser
+     *
+     * @return void
+     */
+    public function deleteCompanyUserById(int $idCompanyUser): void;
 }
