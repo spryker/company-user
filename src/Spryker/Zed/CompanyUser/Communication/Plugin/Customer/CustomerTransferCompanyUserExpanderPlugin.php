@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\CompanyUser\Communication\Plugin;
+namespace Spryker\Zed\CompanyUser\Communication\Plugin\Customer;
 
 use Generated\Shared\Transfer\CustomerTransfer;
 use Spryker\Zed\Customer\Dependency\Plugin\CustomerTransferExpanderPluginInterface;
@@ -37,7 +37,7 @@ class CustomerTransferCompanyUserExpanderPlugin extends AbstractPlugin implement
      */
     protected function addCompanyUserTransfer(CustomerTransfer $customerTransfer): CustomerTransfer
     {
-        $companyUserTransfer = $this->getFacade()->findCompanyUserByCustomerId($customerTransfer);
+        $companyUserTransfer = $this->getFacade()->findActiveCompanyUserByCustomerId($customerTransfer);
         $customerTransfer->setCompanyUserTransfer($companyUserTransfer);
 
         return $customerTransfer;
