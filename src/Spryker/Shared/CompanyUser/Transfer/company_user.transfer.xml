@@ -32,6 +32,7 @@
 
     <transfer name="CompanyUserCriteriaFilter">
         <property name="idCompany" type="int"/>
+        <property name="companyUserIds" type="array"/>
         <property name="filter" type="Filter"/>
         <property name="pagination" type="Pagination"/>
     </transfer>
