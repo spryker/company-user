@@ -274,6 +274,7 @@ class CompanyUser implements CompanyUserInterface
         $companyUserTransfer->setCustomer($companyUserResponseTransfer->getCompanyUser()->getCustomer());
         $companyUserResponseTransfer->setCompanyUser($companyUserTransfer);
         $companyUserResponseTransfer = $this->companyUserPluginExecutor->executePostSavePlugins($companyUserResponseTransfer);
+        $companyUserResponseTransfer = $this->companyUserPluginExecutor->executePostUpdatePlugins($companyUserResponseTransfer);
 
         return $companyUserResponseTransfer;
     }

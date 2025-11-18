@@ -52,6 +52,11 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
     public const PLUGINS_COMPANY_USER_SAVE_PRE_CHECK = 'PLUGINS_COMPANY_USER_SAVE_PRE_CHECK';
 
     /**
+     * @var string
+     */
+    public const PLUGINS_COMPANY_USER_POST_UPDATE = 'PLUGINS_COMPANY_USER_POST_UPDATE';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -66,6 +71,7 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addCompanyUserPreDeletePlugins($container);
         $container = $this->addCompanyUserSavePreCheckPlugins($container);
         $container = $this->addCustomerFacade($container);
+        $container = $this->addCompanyUserPostUpdatePlugins($container);
 
         return $container;
     }
@@ -169,6 +175,20 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCompanyUserPostUpdatePlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_COMPANY_USER_POST_UPDATE, function () {
+            return $this->getCompanyUserPostUpdatePlugins();
+        });
+
+        return $container;
+    }
+
+    /**
      * @return array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPreSavePluginInterface>
      */
     protected function getCompanyUserPreSavePlugins(): array
@@ -212,6 +232,14 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
      * @return array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserSavePreCheckPluginInterface>
      */
     protected function getCompanyUserSavePreCheckPlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPostUpdatePluginInterface>
+     */
+    protected function getCompanyUserPostUpdatePlugins(): array
     {
         return [];
     }

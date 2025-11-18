@@ -62,6 +62,7 @@ class CompanyUserBusinessFactory extends AbstractBusinessFactory
             $this->getCompanyUserPostCreatePlugins(),
             $this->getCompanyUserHydrationPlugins(),
             $this->getCompanyUserPreDeletePlugins(),
+            $this->getCompanyUserPostUpdatePlugins(),
         );
     }
 
@@ -127,5 +128,10 @@ class CompanyUserBusinessFactory extends AbstractBusinessFactory
     public function createCustomerExpander(): CustomerExpanderInterface
     {
         return new CustomerExpander($this->getRepository());
+    }
+
+    public function getCompanyUserPostUpdatePlugins(): array
+    {
+        return $this->getProvidedDependency(CompanyUserDependencyProvider::PLUGINS_COMPANY_USER_POST_UPDATE);
     }
 }

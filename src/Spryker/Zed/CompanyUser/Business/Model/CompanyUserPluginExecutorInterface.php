@@ -30,6 +30,10 @@ interface CompanyUserPluginExecutorInterface
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer;
 
+    public function executePostUpdatePlugins(
+        CompanyUserResponseTransfer $companyUserResponseTransfer
+    ): CompanyUserResponseTransfer;
+
     /**
      * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
      *

@@ -120,6 +120,11 @@ class CompanyUserHelper extends Module
             [],
             'CompanyUser',
         );
+        $this->getBusinessHelper()->mockFactoryMethod(
+            'getCompanyUserPostUpdatePlugins',
+            [],
+            'CompanyUser',
+        );
 
         /** @var \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface $companyUserFacade */
         $companyUserFacade = $this->getBusinessHelper()->getFacade('CompanyUser');

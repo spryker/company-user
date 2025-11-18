@@ -13,49 +13,21 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
 {
     /**
-     * @var array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPreSavePluginInterface>
-     */
-    protected $companyUserPreSavePlugins;
-
-    /**
-     * @var array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPostSavePluginInterface>
-     */
-    protected $companyUserPostSavePlugins;
-
-    /**
-     * @var array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserHydrationPluginInterface>
-     */
-    protected $companyUserHydrationPlugins;
-
-    /**
-     * @var array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPostCreatePluginInterface>
-     */
-    protected $companyUserPostCreatePlugins;
-
-    /**
-     * @var array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPreDeletePluginInterface>
-     */
-    protected $companyUserPreDeletePlugins;
-
-    /**
      * @param array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPreSavePluginInterface> $companyUserPreSavePlugins
      * @param array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPostSavePluginInterface> $companyUserPostSavePlugins
      * @param array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPostCreatePluginInterface> $companyUserPostCreatePlugins
      * @param array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserHydrationPluginInterface> $companyUserHydrationPlugins
      * @param array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPreDeletePluginInterface> $companyUserPreDeletePlugins
+     * @param array<\Spryker\Zed\CompanyUserExtension\Dependency\Plugin\CompanyUserPostUpdatePluginInterface> $companyUserPostUpdatePlugins
      */
     public function __construct(
-        array $companyUserPreSavePlugins = [],
-        array $companyUserPostSavePlugins = [],
-        array $companyUserPostCreatePlugins = [],
-        array $companyUserHydrationPlugins = [],
-        array $companyUserPreDeletePlugins = []
+        protected array $companyUserPreSavePlugins = [],
+        protected array $companyUserPostSavePlugins = [],
+        protected array $companyUserPostCreatePlugins = [],
+        protected array $companyUserHydrationPlugins = [],
+        protected array $companyUserPreDeletePlugins = [],
+        protected array $companyUserPostUpdatePlugins = [],
     ) {
-        $this->companyUserPostSavePlugins = $companyUserPostSavePlugins;
-        $this->companyUserHydrationPlugins = $companyUserHydrationPlugins;
-        $this->companyUserPostCreatePlugins = $companyUserPostCreatePlugins;
-        $this->companyUserPreSavePlugins = $companyUserPreSavePlugins;
-        $this->companyUserPreDeletePlugins = $companyUserPreDeletePlugins;
     }
 
     /**
@@ -83,6 +55,16 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
     ): CompanyUserResponseTransfer {
         foreach ($this->companyUserPostSavePlugins as $companyUserPostSavePlugin) {
             $companyUserResponseTransfer = $companyUserPostSavePlugin->postSave($companyUserResponseTransfer);
+        }
+
+        return $companyUserResponseTransfer;
+    }
+
+    public function executePostUpdatePlugins(
+        CompanyUserResponseTransfer $companyUserResponseTransfer
+    ): CompanyUserResponseTransfer {
+        foreach ($this->companyUserPostUpdatePlugins as $companyUserPostUpdatePlugin) {
+            $companyUserResponseTransfer = $companyUserPostUpdatePlugin->postUpdate($companyUserResponseTransfer);
         }
 
         return $companyUserResponseTransfer;
