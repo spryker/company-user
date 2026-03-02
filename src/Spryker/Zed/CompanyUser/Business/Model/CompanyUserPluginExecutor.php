@@ -30,11 +30,6 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
     ) {
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function executePreSavePlugins(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer {
@@ -45,11 +40,6 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function executePostSavePlugins(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer {
@@ -70,11 +60,6 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function executeHydrationPlugins(CompanyUserTransfer $companyUserTransfer): CompanyUserTransfer
     {
         foreach ($this->companyUserHydrationPlugins as $companyUserHydrationPlugin) {
@@ -84,11 +69,6 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
         return $companyUserTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function executePostCreatePlugins(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer {
@@ -99,11 +79,6 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return void
-     */
     public function executePreDeletePlugins(CompanyUserTransfer $companyUserTransfer): void
     {
         foreach ($this->companyUserPreDeletePlugins as $plugin) {

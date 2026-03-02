@@ -19,17 +19,11 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class CompanyUserPersistenceFactory extends AbstractPersistenceFactory
 {
-    /**
-     * @return \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery
-     */
     public function createCompanyUserQuery(): SpyCompanyUserQuery
     {
         return SpyCompanyUserQuery::create();
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyUser\Persistence\Mapper\CompanyUserMapperInterface
-     */
     public function createCompanyUserMapper(): CompanyUserMapperInterface
     {
         return new CompanyUserMapper();

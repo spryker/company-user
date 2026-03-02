@@ -20,83 +20,43 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
  */
 class GatewayController extends AbstractGatewayController
 {
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function createAction(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         return $this->getFacade()->create($companyUserTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function updateAction(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         return $this->getFacade()->update($companyUserTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function deleteAction(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         return $this->getFacade()->delete($companyUserTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getCompanyUserCollectionAction(
         CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
     ): CompanyUserCollectionTransfer {
         return $this->getFacade()->getCompanyUserCollection($criteriaFilterTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function getCompanyUserByIdAction(CompanyUserTransfer $companyUserTransfer): CompanyUserTransfer
     {
         return $this->getFacade()->getCompanyUserById($companyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getActiveCompanyUsersByCustomerReferenceAction(
         CustomerTransfer $customerTransfer
     ): CompanyUserCollectionTransfer {
         return $this->getFacade()->getActiveCompanyUsersByCustomerReference($customerTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function enableCompanyUserAction(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         return $this->getFacade()->enableCompanyUser($companyUserTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function disableCompanyUserAction(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         return $this->getFacade()->disableCompanyUser($companyUserTransfer);

@@ -56,11 +56,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PLUGINS_COMPANY_USER_POST_UPDATE = 'PLUGINS_COMPANY_USER_POST_UPDATE';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
@@ -76,11 +71,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCustomerFacade(Container $container): Container
     {
         $container->set(static::FACADE_CUSTOMER, function (Container $container) {
@@ -90,11 +80,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserPreSavePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_COMPANY_USER_PRE_SAVE, function () {
@@ -104,11 +89,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserPostSavePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_COMPANY_USER_POST_SAVE, function () {
@@ -118,11 +98,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserPostCreatePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_COMPANY_USER_POST_CREATE, function () {
@@ -132,11 +107,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserHydrationPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_COMPANY_USER_HYDRATE, function () {
@@ -146,11 +116,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserPreDeletePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_COMPANY_USER_PRE_DELETE, function () {
@@ -160,11 +125,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserSavePreCheckPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_COMPANY_USER_SAVE_PRE_CHECK, function () {
@@ -174,11 +134,6 @@ class CompanyUserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserPostUpdatePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_COMPANY_USER_POST_UPDATE, function () {

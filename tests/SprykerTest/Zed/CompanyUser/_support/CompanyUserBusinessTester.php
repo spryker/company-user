@@ -36,12 +36,6 @@ class CompanyUserBusinessTester extends Actor
      */
     protected const STATUS_APPROVED = 'approved';
 
-    /**
-     * @param array $seedData
-     * @param array $companySeedData
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function createCompanyUserTransfer(
         array $seedData = [
             CompanyUserTransfer::IS_ACTIVE => true,
@@ -64,17 +58,11 @@ class CompanyUserBusinessTester extends Actor
         return $this->haveCompanyUser($seedData);
     }
 
-    /**
-     * @return void
-     */
     public function ensureCompanyUserTableIsEmpty(): void
     {
         $this->ensureDatabaseTableIsEmpty($this->createCompanyUserQuery());
     }
 
-    /**
-     * @return \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery
-     */
     protected function createCompanyUserQuery(): SpyCompanyUserQuery
     {
         return SpyCompanyUserQuery::create();

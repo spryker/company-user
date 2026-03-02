@@ -25,31 +25,16 @@ class CompanyUserToCustomerFacadeBridge implements CompanyUserToCustomerFacadeIn
         $this->customerFacade = $customerFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerResponseTransfer
-     */
     public function registerCustomer(CustomerTransfer $customerTransfer): CustomerResponseTransfer
     {
         return $this->customerFacade->registerCustomer($customerTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return void
-     */
     public function anonymizeCustomer(CustomerTransfer $customerTransfer): void
     {
         $this->customerFacade->anonymizeCustomer($customerTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerResponseTransfer
-     */
     public function updateCustomer(CustomerTransfer $customerTransfer): CustomerResponseTransfer
     {
         return $this->customerFacade->updateCustomer($customerTransfer);

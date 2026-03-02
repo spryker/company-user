@@ -21,11 +21,6 @@ class CompanyUserEntityManager extends AbstractEntityManager implements CompanyU
      */
     protected const COLUMN_COMPANY_USER_IS_ACTIVE = 'IsActive';
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function saveCompanyUser(
         CompanyUserTransfer $companyUserTransfer
     ): CompanyUserTransfer {
@@ -42,11 +37,6 @@ class CompanyUserEntityManager extends AbstractEntityManager implements CompanyU
         return $companyUserTransfer->fromArray($newCompanyUserTransfer->modifiedToArray());
     }
 
-    /**
-     * @param int $idCompanyUser
-     *
-     * @return void
-     */
     public function deleteCompanyUserById(int $idCompanyUser): void
     {
         $this->getFactory()
@@ -55,11 +45,6 @@ class CompanyUserEntityManager extends AbstractEntityManager implements CompanyU
             ->delete();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function updateCompanyUserStatus(
         CompanyUserTransfer $companyUserTransfer
     ): CompanyUserTransfer {

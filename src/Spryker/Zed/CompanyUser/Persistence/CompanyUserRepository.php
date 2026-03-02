@@ -31,11 +31,6 @@ class CompanyUserRepository extends AbstractRepository implements CompanyUserRep
      */
     protected const COL_CUSTOMER_REFERENCE = 'spy_customer.customer_reference';
 
-    /**
-     * @param int $idCustomer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findCompanyUserByCustomerId(int $idCustomer): ?CompanyUserTransfer
     {
         $query = $this->getFactory()
@@ -188,11 +183,6 @@ class CompanyUserRepository extends AbstractRepository implements CompanyUserRep
         return $customerReferences->toArray();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findCompanyUserByIdCompanyUser(CompanyUserTransfer $companyUserTransfer): ?CompanyUserTransfer
     {
         $companyUserEntityTransfer = $this->getFactory()

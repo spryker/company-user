@@ -33,11 +33,6 @@ class CustomerTransferCompanyUserExpanderPlugin extends AbstractPlugin implement
         return $this->addCompanyUserTransfer($customerTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected function addCompanyUserTransfer(CustomerTransfer $customerTransfer): CustomerTransfer
     {
         if ($customerTransfer->getCompanyUserTransfer() !== null) {

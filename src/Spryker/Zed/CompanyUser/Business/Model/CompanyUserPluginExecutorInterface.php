@@ -12,20 +12,10 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 interface CompanyUserPluginExecutorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function executePreSavePlugins(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function executePostSavePlugins(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer;
@@ -34,26 +24,11 @@ interface CompanyUserPluginExecutorInterface
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function executePostCreatePlugins(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function executeHydrationPlugins(CompanyUserTransfer $companyUserTransfer): CompanyUserTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return void
-     */
     public function executePreDeletePlugins(CompanyUserTransfer $companyUserTransfer): void;
 }

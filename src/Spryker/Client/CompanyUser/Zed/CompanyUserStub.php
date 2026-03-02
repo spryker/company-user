@@ -30,19 +30,11 @@ class CompanyUserStub implements CompanyUserStubInterface
      */
     protected $zedRequestClient;
 
-    /**
-     * @param \Spryker\Client\ZedRequest\ZedRequestClient $zedRequestClient
-     */
     public function __construct(ZedRequestClient $zedRequestClient)
     {
         $this->zedRequestClient = $zedRequestClient;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function createCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         if (!$this->can('AddCompanyUserPermissionPlugin')) {
@@ -55,11 +47,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function updateCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         /** @var \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer */
@@ -68,11 +55,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function deleteCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         /** @var \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer */
@@ -81,11 +63,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getCompanyUserCollection(
         CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
     ): CompanyUserCollectionTransfer {
@@ -98,11 +75,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserCollectionTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function getCompanyUserById(CompanyUserTransfer $companyUserTransfer): CompanyUserTransfer
     {
         /** @var \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer */
@@ -114,9 +86,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     protected function generatePermissionErrorMessage(): CompanyUserResponseTransfer
     {
         $companyUserResponseTransfer = new CompanyUserResponseTransfer();
@@ -129,11 +98,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function enableCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         /** @var \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer */
@@ -145,11 +109,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function disableCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         /** @var \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer */
@@ -161,11 +120,6 @@ class CompanyUserStub implements CompanyUserStubInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getActiveCompanyUsersByCustomerReference(CustomerTransfer $customerTransfer): CompanyUserCollectionTransfer
     {
         /** @var \Generated\Shared\Transfer\CompanyUserCollectionTransfer $companyUserCollectionTransfer */

@@ -56,11 +56,6 @@ class CompanyUserHelper extends Module
         return $companyUserTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return void
-     */
     public function assignCompanyRolesToCompanyUser(CompanyUserTransfer $companyUserTransfer): void
     {
         $companyUserTransfer->requireCompanyRoleCollection();
@@ -68,17 +63,11 @@ class CompanyUserHelper extends Module
         $this->getCompanyRoleFacade()->saveCompanyUser($companyUserTransfer);
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyRole\Business\CompanyRoleFacadeInterface
-     */
     protected function getCompanyRoleFacade(): CompanyRoleFacadeInterface
     {
         return $this->getLocator()->companyRole()->facade();
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface
-     */
     public function createCompanyUserFacade(): CompanyUserFacadeInterface
     {
         if ($this->getLocatorHelper()->isProjectNamespaceEnabled()) {

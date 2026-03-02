@@ -17,11 +17,6 @@ use Orm\Zed\CompanyUser\Persistence\SpyCompanyUser;
 
 class CompanyUserMapper implements CompanyUserMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\SpyCompanyUserEntityTransfer
-     */
     public function mapCompanyUserTransferToEntityTransfer(
         CompanyUserTransfer $companyUserTransfer
     ): SpyCompanyUserEntityTransfer {
@@ -31,11 +26,6 @@ class CompanyUserMapper implements CompanyUserMapperInterface
         return $companyUserEntityTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\SpyCompanyUserEntityTransfer $companyUserEntityTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function mapEntityTransferToCompanyUserTransfer(
         SpyCompanyUserEntityTransfer $companyUserEntityTransfer
     ): CompanyUserTransfer {
@@ -79,11 +69,6 @@ class CompanyUserMapper implements CompanyUserMapperInterface
         return $companyUserCollectionTransfer;
     }
 
-    /**
-     * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $companyUserEntity
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function mapCompanyUserEntityToCompanyUserTransfer(
         SpyCompanyUser $companyUserEntity
     ): CompanyUserTransfer {

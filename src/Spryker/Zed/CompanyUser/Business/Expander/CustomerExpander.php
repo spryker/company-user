@@ -17,19 +17,11 @@ class CustomerExpander implements CustomerExpanderInterface
      */
     protected $repository;
 
-    /**
-     * @param \Spryker\Zed\CompanyUser\Persistence\CompanyUserRepositoryInterface $repository
-     */
     public function __construct(CompanyUserRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function expandCustomerWithIsActiveCompanyUserExists(CustomerTransfer $customerTransfer): CustomerTransfer
     {
         $idCustomer = $customerTransfer->getIdCustomerOrFail();

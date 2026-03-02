@@ -34,9 +34,6 @@ class GetCompanyUserCollectionTest extends Unit
      */
     protected CompanyUserBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -44,9 +41,6 @@ class GetCompanyUserCollectionTest extends Unit
         $this->tester->ensureCompanyUserTableIsEmpty();
     }
 
-    /**
-     * @return void
-     */
     public function testShouldReturnTransfer(): void
     {
         // Assign
@@ -64,9 +58,6 @@ class GetCompanyUserCollectionTest extends Unit
         $this->assertCount(1, $companyUserCollectionTransfer->getCompanyUsers());
     }
 
-    /**
-     * @return void
-     */
     public function testIgnoresAnonymizedCustomersByDefault(): void
     {
         // Arrange
@@ -95,9 +86,6 @@ class GetCompanyUserCollectionTest extends Unit
         $this->assertNull($companyUserTransfers->getIterator()->current()->getCustomer()->getAnonymizedAt());
     }
 
-    /**
-     * @return void
-     */
     public function testIncludesAnonymizedCustomersWhenRequested(): void
     {
         // Arrange

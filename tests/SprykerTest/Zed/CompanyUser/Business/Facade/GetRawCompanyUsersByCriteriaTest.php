@@ -34,9 +34,6 @@ class GetRawCompanyUsersByCriteriaTest extends Unit
      */
     protected CompanyUserBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -44,9 +41,6 @@ class GetRawCompanyUsersByCriteriaTest extends Unit
         $this->tester->ensureCompanyUserTableIsEmpty();
     }
 
-    /**
-     * @return void
-     */
     public function testShouldReturnTransfer(): void
     {
         // Arrange
@@ -66,9 +60,6 @@ class GetRawCompanyUsersByCriteriaTest extends Unit
         $this->assertSame($companyUserTransfer->getIdCompanyUser(), $foundCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testIgnoresAnonymizedCustomersByDefault(): void
     {
         // Arrange
@@ -97,9 +88,6 @@ class GetRawCompanyUsersByCriteriaTest extends Unit
         $this->assertNull($companyUserTransfers->getIterator()->current()->getCustomer()->getAnonymizedAt());
     }
 
-    /**
-     * @return void
-     */
     public function testIncludesAnonymizedCustomersWhenRequested(): void
     {
         // Arrange

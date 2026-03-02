@@ -26,9 +26,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class CompanyUserBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\CompanyUser\Business\Model\CompanyUserInterface
-     */
     public function createCompanyUser(): CompanyUserInterface
     {
         return new CompanyUser(
@@ -40,9 +37,6 @@ class CompanyUserBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyUser\Business\CompanyUser\CompanyUserStatusHandlerInterface
-     */
     public function createCompanyUserStatusHandler(): CompanyUserStatusHandlerInterface
     {
         return new CompanyUserStatusHandler(
@@ -51,9 +45,6 @@ class CompanyUserBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyUser\Business\Model\CompanyUserPluginExecutorInterface
-     */
     protected function createCompanyUserPluginExecutor(): CompanyUserPluginExecutorInterface
     {
         return new CompanyUserPluginExecutor(
@@ -66,9 +57,6 @@ class CompanyUserBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyUser\Dependency\Facade\CompanyUserToCustomerFacadeInterface
-     */
     protected function getCustomerFacade(): CompanyUserToCustomerFacadeInterface
     {
         return $this->getProvidedDependency(CompanyUserDependencyProvider::FACADE_CUSTOMER);
@@ -122,9 +110,6 @@ class CompanyUserBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(CompanyUserDependencyProvider::PLUGINS_COMPANY_USER_SAVE_PRE_CHECK);
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyUser\Business\Expander\CustomerExpanderInterface
-     */
     public function createCustomerExpander(): CustomerExpanderInterface
     {
         return new CustomerExpander($this->getRepository());

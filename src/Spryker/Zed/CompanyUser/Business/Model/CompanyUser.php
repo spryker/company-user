@@ -71,11 +71,6 @@ class CompanyUser implements CompanyUserInterface
         $this->companyUserSavePreCheckPlugins = $companyUserSavePreCheckPlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function create(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         $companyUserResponseTransfer = $this->executeSavePreCheckPlugins($companyUserTransfer);
@@ -89,11 +84,6 @@ class CompanyUser implements CompanyUserInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function save(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         $companyUserResponseTransfer = $this->executeSavePreCheckPlugins($companyUserTransfer);
@@ -109,11 +99,6 @@ class CompanyUser implements CompanyUserInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function delete(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($companyUserTransfer) {
@@ -130,11 +115,6 @@ class CompanyUser implements CompanyUserInterface
         });
     }
 
-    /**
-     * @param int $idCustomer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findCompanyUserByCustomerId(int $idCustomer): ?CompanyUserTransfer
     {
         $companyUserTransfer = $this->companyUserRepository->findCompanyUserByCustomerId($idCustomer);
@@ -146,11 +126,6 @@ class CompanyUser implements CompanyUserInterface
         return null;
     }
 
-    /**
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function getCompanyUserById(int $idCompanyUser): CompanyUserTransfer
     {
         $companyUserTransfer = $this->companyUserRepository->getCompanyUserById($idCompanyUser);
@@ -158,11 +133,6 @@ class CompanyUser implements CompanyUserInterface
         return $this->companyUserPluginExecutor->executeHydrationPlugins($companyUserTransfer);
     }
 
-    /**
-     * @param int $idCustomer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findActiveCompanyUserByCustomerId(int $idCustomer): ?CompanyUserTransfer
     {
         $companyUserTransfer = $this->companyUserRepository->findActiveCompanyUserByCustomerId($idCustomer);
@@ -174,11 +144,6 @@ class CompanyUser implements CompanyUserInterface
         return null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getActiveCompanyUsersByCustomerReference(CustomerTransfer $customerTransfer): CompanyUserCollectionTransfer
     {
         $customerTransfer->requireCustomerReference();
@@ -192,11 +157,6 @@ class CompanyUser implements CompanyUserInterface
         return $companyUserCollectionTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getCompanyUserCollection(
         CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer
     ): CompanyUserCollectionTransfer {
@@ -229,11 +189,6 @@ class CompanyUser implements CompanyUserInterface
         return $this->companyUserRepository->findActiveCompanyUserIdsByCompanyIds($companyIds);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     protected function executeCreateTransaction(CompanyUserResponseTransfer $companyUserResponseTransfer): CompanyUserResponseTransfer
     {
         $companyUserResponseTransfer = $this->registerCustomer($companyUserResponseTransfer);
@@ -252,11 +207,6 @@ class CompanyUser implements CompanyUserInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     protected function executeSaveTransaction(CompanyUserResponseTransfer $companyUserResponseTransfer): CompanyUserResponseTransfer
     {
         $companyUserResponseTransfer->requireCompanyUser();
@@ -279,11 +229,6 @@ class CompanyUser implements CompanyUserInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     protected function updateCustomer(CompanyUserResponseTransfer $companyUserResponseTransfer): CompanyUserResponseTransfer
     {
         $companyUserTransfer = $companyUserResponseTransfer->getCompanyUser();
@@ -304,11 +249,6 @@ class CompanyUser implements CompanyUserInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     protected function registerCustomer(CompanyUserResponseTransfer $companyUserResponseTransfer): CompanyUserResponseTransfer
     {
         $companyUserResponseTransfer->requireCompanyUser();
@@ -351,11 +291,6 @@ class CompanyUser implements CompanyUserInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyResponseTransfer $companyResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyResponseTransfer
-     */
     public function createInitialCompanyUser(CompanyResponseTransfer $companyResponseTransfer): CompanyResponseTransfer
     {
         $companyResponseTransfer->getCompanyTransfer()->requireIdCompany()->requireInitialUserTransfer();
@@ -373,11 +308,6 @@ class CompanyUser implements CompanyUserInterface
         return $companyResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findActiveCompanyUserByUuid(CompanyUserTransfer $companyUserTransfer): ?CompanyUserTransfer
     {
         $companyUserTransfer->requireUuid();
@@ -423,11 +353,6 @@ class CompanyUser implements CompanyUserInterface
         return $companyUserResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function deleteCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($companyUserTransfer) {
@@ -437,11 +362,6 @@ class CompanyUser implements CompanyUserInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     protected function executeDeleteCompanyUserTransaction(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         $this->companyUserPluginExecutor->executePreDeletePlugins($companyUserTransfer);
@@ -451,11 +371,6 @@ class CompanyUser implements CompanyUserInterface
         return (new CompanyUserResponseTransfer())->setIsSuccessful(true);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     protected function executeSavePreCheckPlugins(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         foreach ($this->companyUserSavePreCheckPlugins as $companyUserSavePreCheckPlugin) {
@@ -470,11 +385,6 @@ class CompanyUser implements CompanyUserInterface
             ->setIsSuccessful(true);
     }
 
-    /**
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findCompanyUserById(int $idCompanyUser): ?CompanyUserTransfer
     {
         $companyUserTransfer = $this->companyUserRepository->findCompanyUserById($idCompanyUser);
@@ -486,11 +396,6 @@ class CompanyUser implements CompanyUserInterface
         return null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserCriteriaTransfer $companyUserCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getCompanyUserCollectionByCriteria(CompanyUserCriteriaTransfer $companyUserCriteriaTransfer): CompanyUserCollectionTransfer
     {
         $companyUserCollectionTransfer = $this->companyUserRepository

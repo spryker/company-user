@@ -43,9 +43,6 @@ class CompanyUserFacadeTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testCreateShouldPersistCompanyUser(): void
     {
         // Arrange
@@ -68,9 +65,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNotNull($foundCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateInitialCompanyUserShouldPersistCompanyUser(): void
     {
         // Assign
@@ -94,9 +88,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNotNull($foundCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateShouldPersistCompanyUserChanges(): void
     {
         // Assign
@@ -113,9 +104,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertSame(static::FIRST_NAME_TEST, $companyUserResponseTransfer->getCompanyUser()->getCustomer()->getFirstName());
     }
 
-    /**
-     * @return void
-     */
     public function testDeleteShouldRemoveCompanyUserFromStorage(): void
     {
         // Assign
@@ -134,9 +122,6 @@ class CompanyUserFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testFindCompanyUserByCustomerIdShouldReturnTransfer(): void
     {
         // Assign
@@ -152,9 +137,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNotNull($companyUserTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testFindCompanyUserByCustomerIdShouldReturnNullWhenCustomerDoesNotExists(): void
     {
         // Assign
@@ -169,9 +151,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNull($companyUserTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testFindActiveCompanyUserByCustomerIdShouldReturnTransfer(): void
     {
         // Assign
@@ -190,9 +169,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNotNull($companyUserTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testFindActiveCompanyUserByCustomerIdShouldReturnNullWhenCompanyIsNotActive(): void
     {
         // Assign
@@ -211,9 +187,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNull($companyUserTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testFindActiveCompanyUserByCustomerIdShouldReturnNullWhenCompanyUserIsNotActive(): void
     {
         // Assign
@@ -232,9 +205,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNull($companyUserTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testGetActiveCompanyUsersByCustomerReferenceShouldReturnTransfer(): void
     {
         // Assign
@@ -248,9 +218,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertCount(1, $companyUserCollectionTransfer->getCompanyUsers());
     }
 
-    /**
-     * @return void
-     */
     public function testGetActiveCompanyUsersByCustomerReferenceShouldNotReturnInactiveCompanyUsers(): void
     {
         // Assign
@@ -268,9 +235,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertCount(0, $companyUserCollectionTransfer->getCompanyUsers());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyUserByIdShouldReturnTransfer(): void
     {
         // Assign
@@ -284,9 +248,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNotNull($foundCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testFindInitialCompanyUserByCompanyIdShouldReturnInitialUserTransfer(): void
     {
         // Assign
@@ -311,9 +272,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertSame($initialCompanyUserId, $companyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testCountActiveCompanyUsersByIdCustomerCountsActiveCompanyUsersOnly(): void
     {
         //Arrange
@@ -343,9 +301,6 @@ class CompanyUserFacadeTest extends Unit
         $this->tester->assertSame($expectedCount, $actualCompanyUserAmount);
     }
 
-    /**
-     * @return void
-     */
     public function testEnableCompanyUserShouldEnableInactiveUser(): void
     {
         // Arrange
@@ -361,9 +316,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertTrue($companyUserResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testEnableCompanyUserShouldNotEnableActiveUser(): void
     {
         // Arrange
@@ -377,9 +329,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertFalse($companyUserResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testDisableCompanyUserShouldDisableActiveUser(): void
     {
         // Arrange
@@ -393,9 +342,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertTrue($companyUserResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testDisableCompanyUserShouldNotDisableInactiveUser(): void
     {
         // Arrange
@@ -411,9 +357,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertFalse($companyUserResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testFindActiveCompanyUsersWillReturnArrayOfActiveCompanyUsers(): void
     {
         //Assign
@@ -437,9 +380,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertSame($activeCompanyUsers[0]->getIdCompanyUser(), $activeCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testFindActiveCompanyUserIdsByCompanyIdsShouldReturnIdsOfActiveCompanyUsers(): void
     {
         //Assign
@@ -464,9 +404,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertEquals($activeCompanyUsers[0], $activeCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testDeleteCompanyUserShouldRemoveCompanyUserFromStorageWithoutCustomerAnonymizing(): void
     {
         // Assign
@@ -488,9 +425,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertSame($customerTransfer, $this->tester->getCustomerFacade()->getCustomer($customerTransfer));
     }
 
-    /**
-     * @return void
-     */
     public function testFindCompanyUserByIdShouldReturnTransfer(): void
     {
         // Assign
@@ -504,9 +438,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNotNull($foundCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyUserCollectionByCriteriaRetrievesCompanyUsersByEmailPattern(): void
     {
         // Assign
@@ -525,9 +456,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertSame($companyUserTransfer->getIdCompanyUser(), $foundCompanyUserTransfer->getIdCompanyUser());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyUserCollectionByCriteriaRetrievesCompanyUsersByFirstNamePattern(): void
     {
         // Assign
@@ -548,9 +476,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertContains($companyUserTransfer->getIdCompanyUser(), $companyUserIds);
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyUserCollectionByCriteriaRetrievesCompanyUsersByLastNamePattern(): void
     {
         // Assign
@@ -571,9 +496,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertContains($companyUserTransfer->getIdCompanyUser(), $companyUserIds);
     }
 
-    /**
-     * @return void
-     */
     public function testExpandCustomerWithIsActiveCompanyUserExistsSuccess(): void
     {
         // Arrange
@@ -588,9 +510,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertTrue($result->getIsActiveCompanyUserExists());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandCustomerWithIsActiveCompanyUserExistsWithNotActiveUser(): void
     {
         // Arrange
@@ -609,9 +528,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertFalse($result->getIsActiveCompanyUserExists());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandCustomerWithIsActiveCompanyUserExistsWithNotActiveCompany(): void
     {
         // Arrange
@@ -634,9 +550,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertFalse($result->getIsActiveCompanyUserExists());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandCustomerWithIsActiveCompanyUserExistsWithPendingCompany(): void
     {
         // Arrange
@@ -659,9 +572,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertFalse($result->getIsActiveCompanyUserExists());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandCustomerWithIsActiveCompanyUserExistsWithDeniedCompany(): void
     {
         // Arrange
@@ -684,9 +594,6 @@ class CompanyUserFacadeTest extends Unit
         $this->assertFalse($result->getIsActiveCompanyUserExists());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandCustomerWithIsActiveCompanyUserExistsWithoutCompanyUsers(): void
     {
         // Arrange

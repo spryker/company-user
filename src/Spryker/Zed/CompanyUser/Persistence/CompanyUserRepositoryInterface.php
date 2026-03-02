@@ -14,46 +14,16 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 interface CompanyUserRepositoryInterface
 {
-    /**
-     * @param int $idCustomer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findCompanyUserByCustomerId(int $idCustomer): ?CompanyUserTransfer;
 
-    /**
-     * @param int $idCustomer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findActiveCompanyUserByCustomerId(int $idCustomer): ?CompanyUserTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getCompanyUserCollection(CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer): CompanyUserCollectionTransfer;
 
-    /**
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function getCompanyUserById(int $idCompanyUser): CompanyUserTransfer;
 
-    /**
-     * @param int $idCompany
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findInitialCompanyUserByCompanyId(int $idCompany): ?CompanyUserTransfer;
 
-    /**
-     * @param int $idCustomer
-     *
-     * @return int
-     */
     public function countActiveCompanyUsersByIdCustomer(int $idCustomer): int;
 
     /**
@@ -63,27 +33,12 @@ interface CompanyUserRepositoryInterface
      */
     public function getCustomerReferencesByCompanyUserIds(array $companyUserIds): array;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findCompanyUserByIdCompanyUser(CompanyUserTransfer $companyUserTransfer): ?CompanyUserTransfer;
 
-    /**
-     * @param string $customerReference
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getActiveCompanyUsersByCustomerReference(
         string $customerReference
     ): CompanyUserCollectionTransfer;
 
-    /**
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findCompanyUserById(int $idCompanyUser): ?CompanyUserTransfer;
 
     /**
@@ -100,24 +55,9 @@ interface CompanyUserRepositoryInterface
      */
     public function findActiveCompanyUserIdsByCompanyIds(array $companyIds): array;
 
-    /**
-     * @param string $uuidCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
-     */
     public function findActiveCompanyUserByUuid(string $uuidCompanyUser): ?CompanyUserTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserCriteriaTransfer $companyUserCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getCompanyUserCollectionByCriteria(CompanyUserCriteriaTransfer $companyUserCriteriaTransfer): CompanyUserCollectionTransfer;
 
-    /**
-     * @param int $idCustomer
-     *
-     * @return bool
-     */
     public function isActiveCompanyUser(int $idCustomer): bool;
 }

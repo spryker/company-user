@@ -19,9 +19,6 @@ class AddCompanyUserPermissionPlugin implements PermissionPluginInterface
      */
     public const KEY = 'AddCompanyUserPermissionPlugin';
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return static::KEY;

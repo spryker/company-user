@@ -24,10 +24,6 @@ class CompanyUserStatusHandler implements CompanyUserStatusHandlerInterface
      */
     protected $companyUserEntityManager;
 
-    /**
-     * @param \Spryker\Zed\CompanyUser\Persistence\CompanyUserRepositoryInterface $companyUserRepository
-     * @param \Spryker\Zed\CompanyUser\Persistence\CompanyUserEntityManagerInterface $companyUserEntityManager
-     */
     public function __construct(
         CompanyUserRepositoryInterface $companyUserRepository,
         CompanyUserEntityManagerInterface $companyUserEntityManager
@@ -36,11 +32,6 @@ class CompanyUserStatusHandler implements CompanyUserStatusHandlerInterface
         $this->companyUserEntityManager = $companyUserEntityManager;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function enableCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         $companyUserTransfer->requireIdCompanyUser();
@@ -63,11 +54,6 @@ class CompanyUserStatusHandler implements CompanyUserStatusHandlerInterface
             ->setIsSuccessful(true);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function disableCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         $companyUserTransfer->requireIdCompanyUser();
