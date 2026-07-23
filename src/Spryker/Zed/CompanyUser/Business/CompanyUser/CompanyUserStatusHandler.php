@@ -9,6 +9,7 @@ namespace Spryker\Zed\CompanyUser\Business\CompanyUser;
 
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
+use Spryker\Zed\CompanyUser\Business\Model\CompanyUserPluginExecutorInterface;
 use Spryker\Zed\CompanyUser\Persistence\CompanyUserEntityManagerInterface;
 use Spryker\Zed\CompanyUser\Persistence\CompanyUserRepositoryInterface;
 
@@ -24,12 +25,16 @@ class CompanyUserStatusHandler implements CompanyUserStatusHandlerInterface
      */
     protected $companyUserEntityManager;
 
+    protected CompanyUserPluginExecutorInterface $companyUserPluginExecutor;
+
     public function __construct(
         CompanyUserRepositoryInterface $companyUserRepository,
-        CompanyUserEntityManagerInterface $companyUserEntityManager
+        CompanyUserEntityManagerInterface $companyUserEntityManager,
+        CompanyUserPluginExecutorInterface $companyUserPluginExecutor
     ) {
         $this->companyUserRepository = $companyUserRepository;
         $this->companyUserEntityManager = $companyUserEntityManager;
+        $this->companyUserPluginExecutor = $companyUserPluginExecutor;
     }
 
     public function enableCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
@@ -49,9 +54,11 @@ class CompanyUserStatusHandler implements CompanyUserStatusHandlerInterface
         $existingCompanyUser->setIsActive(true);
         $this->companyUserEntityManager->updateCompanyUserStatus($existingCompanyUser);
 
-        return $companyUserResponseTransfer
+        $companyUserResponseTransfer = $companyUserResponseTransfer
             ->setCompanyUser($existingCompanyUser)
             ->setIsSuccessful(true);
+
+        return $this->companyUserPluginExecutor->executePostUpdatePlugins($companyUserResponseTransfer);
     }
 
     public function disableCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
@@ -71,8 +78,10 @@ class CompanyUserStatusHandler implements CompanyUserStatusHandlerInterface
         $existingCompanyUser->setIsActive(false);
         $this->companyUserEntityManager->updateCompanyUserStatus($existingCompanyUser);
 
-        return $companyUserResponseTransfer
+        $companyUserResponseTransfer = $companyUserResponseTransfer
             ->setCompanyUser($existingCompanyUser)
             ->setIsSuccessful(true);
+
+        return $this->companyUserPluginExecutor->executePostUpdatePlugins($companyUserResponseTransfer);
     }
 }

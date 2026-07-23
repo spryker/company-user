@@ -42,10 +42,11 @@ class CompanyUserBusinessFactory extends AbstractBusinessFactory
         return new CompanyUserStatusHandler(
             $this->getRepository(),
             $this->getEntityManager(),
+            $this->createCompanyUserPluginExecutor(),
         );
     }
 
-    protected function createCompanyUserPluginExecutor(): CompanyUserPluginExecutorInterface
+    public function createCompanyUserPluginExecutor(): CompanyUserPluginExecutorInterface
     {
         return new CompanyUserPluginExecutor(
             $this->getCompanyUserPreSavePlugins(),
