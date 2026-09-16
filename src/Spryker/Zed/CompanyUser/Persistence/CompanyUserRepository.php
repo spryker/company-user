@@ -11,12 +11,15 @@ use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserCriteriaTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
+use Generated\Shared\Transfer\FilterTransfer;
 use Generated\Shared\Transfer\PaginationTransfer;
 use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
+use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
+use Propel\Runtime\Map\TableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -110,23 +113,26 @@ class CompanyUserRepository extends AbstractRepository implements CompanyUserRep
 
     /**
      * @module Customer
+     * @module Company
      *
      * @uses \Orm\Zed\Customer\Persistence\SpyCustomerQuery
-     *
-     * @param \Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     * @uses \Orm\Zed\Company\Persistence\SpyCompanyQuery
      */
     public function getCompanyUserCollection(CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer): CompanyUserCollectionTransfer
     {
         /** @var \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery $queryCompanyUser */
         $queryCompanyUser = $this->getFactory()
             ->createCompanyUserQuery()
-            ->joinWithCustomer();
+            ->joinWithCustomer()
+            ->leftJoinWithCompany();
 
         $this->applyFilters($queryCompanyUser, $criteriaFilterTransfer);
+        $this->applySortCollection($queryCompanyUser, $criteriaFilterTransfer);
 
-        $collection = $this->buildQueryFromCriteria($queryCompanyUser, $criteriaFilterTransfer->getFilter());
+        $collection = $this->buildQueryFromCriteria(
+            $queryCompanyUser,
+            $this->sanitizeFilter($criteriaFilterTransfer->getFilter()),
+        );
         /** @var array<\Generated\Shared\Transfer\SpyCompanyUserEntityTransfer> $companyUserCollection */
         $companyUserCollection = $this->getPaginatedCollection($collection, $criteriaFilterTransfer->getPagination());
 
@@ -314,6 +320,67 @@ class CompanyUserRepository extends AbstractRepository implements CompanyUserRep
 
     /**
      * @module Customer
+     * @module Company
+     *
+     * @uses \Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap
+     * @uses \Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap
+     */
+    protected function applySortCollection(
+        SpyCompanyUserQuery $queryCompanyUser,
+        CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
+    ): void {
+        $sortableFieldMap = $this->getFactory()->getConfig()->getCompanyUserCollectionSortableFieldMap();
+
+        foreach ($criteriaFilterTransfer->getSortCollection() as $sortTransfer) {
+            $column = $sortableFieldMap[$sortTransfer->getField()] ?? null;
+
+            if ($column === null) {
+                continue;
+            }
+
+            $queryCompanyUser->orderBy(
+                $column,
+                $sortTransfer->getIsAscending() === false ? Criteria::DESC : Criteria::ASC,
+            );
+        }
+    }
+
+    protected function sanitizeFilter(?FilterTransfer $filterTransfer): ?FilterTransfer
+    {
+        if ($filterTransfer === null || $filterTransfer->getOrderBy() === null) {
+            return $filterTransfer;
+        }
+
+        if (in_array($filterTransfer->getOrderBy(), $this->getOrderableColumnNames(), true)) {
+            return $filterTransfer;
+        }
+
+        return (new FilterTransfer())
+            ->fromArray($filterTransfer->toArray(), true)
+            ->setOrderBy(null)
+            ->setOrderDirection(null);
+    }
+
+    /**
+     * @module Customer
+     * @module Company
+     *
+     * @return array<string>
+     */
+    protected function getOrderableColumnNames(): array
+    {
+        $columnNames = [];
+
+        foreach ([SpyCompanyUserTableMap::class, SpyCustomerTableMap::class, SpyCompanyTableMap::class] as $tableMapClass) {
+            $columnNames[] = $tableMapClass::getFieldNames(TableMap::TYPE_COLNAME);
+            $columnNames[] = $tableMapClass::getFieldNames(TableMap::TYPE_FIELDNAME);
+        }
+
+        return array_merge(...$columnNames);
+    }
+
+    /**
+     * @module Customer
      *
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery $queryCompanyUser
      * @param \Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer $criteriaFilterTransfer
@@ -348,6 +415,21 @@ class CompanyUserRepository extends AbstractRepository implements CompanyUserRep
 
         if ($criteriaFilterTransfer->getIsActive() !== null) {
             $queryCompanyUser->filterByIsActive($criteriaFilterTransfer->getIsActive());
+        }
+
+        if ($criteriaFilterTransfer->getUuid() !== null) {
+            $queryCompanyUser->filterByUuid($criteriaFilterTransfer->getUuid());
+        }
+
+        if ($criteriaFilterTransfer->getIdCompanyBusinessUnit() !== null) {
+            $queryCompanyUser->filterByFkCompanyBusinessUnit($criteriaFilterTransfer->getIdCompanyBusinessUnit());
+        }
+
+        if ($criteriaFilterTransfer->getCustomerReferences() !== []) {
+            $queryCompanyUser
+                ->useCustomerQuery()
+                    ->filterByCustomerReference_In($criteriaFilterTransfer->getCustomerReferences())
+                ->endUse();
         }
     }
 

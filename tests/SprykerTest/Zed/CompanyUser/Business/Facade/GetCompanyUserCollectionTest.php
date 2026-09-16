@@ -14,6 +14,9 @@ use Generated\Shared\DataBuilder\CustomerBuilder;
 use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\FilterTransfer;
+use Generated\Shared\Transfer\SortTransfer;
+use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use SprykerTest\Zed\CompanyUser\CompanyUserBusinessTester;
 
 /**
@@ -56,6 +59,66 @@ class GetCompanyUserCollectionTest extends Unit
 
         // Assert
         $this->assertCount(1, $companyUserCollectionTransfer->getCompanyUsers());
+    }
+
+    public function testKeepsAnOrderByThatNamesAColumnOfTheQueriedTables(): void
+    {
+        // Arrange
+        $this->tester->createCompanyUserTransfer();
+        $companyUserCriteriaFilterTransfer = (new CompanyUserCriteriaFilterTransfer())
+            ->setFilter((new FilterTransfer())->setOrderBy(SpyCompanyUserTableMap::COL_ID_COMPANY_USER));
+
+        // Act
+        $companyUserCollectionTransfer = $this->tester
+            ->getFacade()
+            ->getCompanyUserCollection($companyUserCriteriaFilterTransfer);
+
+        // Assert
+        $this->assertCount(
+            1,
+            $companyUserCollectionTransfer->getCompanyUsers(),
+            'A caller ordering by a real column of the query keeps working.',
+        );
+    }
+
+    public function testDropsAnOrderByThatIsNotAColumnOfTheQueriedTables(): void
+    {
+        // Arrange
+        $this->tester->createCompanyUserTransfer();
+        $companyUserCriteriaFilterTransfer = (new CompanyUserCriteriaFilterTransfer())
+            ->setFilter((new FilterTransfer())->setOrderBy('(SELECT 1); DROP TABLE spy_company_user; --'));
+
+        // Act
+        $companyUserCollectionTransfer = $this->tester
+            ->getFacade()
+            ->getCompanyUserCollection($companyUserCriteriaFilterTransfer);
+
+        // Assert
+        $this->assertCount(
+            1,
+            $companyUserCollectionTransfer->getCompanyUsers(),
+            'An order-by the repository cannot resolve to a column is dropped instead of reaching Propel.',
+        );
+    }
+
+    public function testIgnoresASortFieldOutsideTheSortableFieldMap(): void
+    {
+        // Arrange
+        $this->tester->createCompanyUserTransfer();
+        $companyUserCriteriaFilterTransfer = (new CompanyUserCriteriaFilterTransfer())
+            ->addSort((new SortTransfer())->setField('spy_company_user.id_company_user; --'));
+
+        // Act
+        $companyUserCollectionTransfer = $this->tester
+            ->getFacade()
+            ->getCompanyUserCollection($companyUserCriteriaFilterTransfer);
+
+        // Assert
+        $this->assertCount(
+            1,
+            $companyUserCollectionTransfer->getCompanyUsers(),
+            'A sort field absent from the sortable field map resolves to no column and is skipped.',
+        );
     }
 
     public function testIgnoresAnonymizedCustomersByDefault(): void

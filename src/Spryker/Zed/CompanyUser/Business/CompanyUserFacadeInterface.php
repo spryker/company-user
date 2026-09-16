@@ -118,8 +118,21 @@ interface CompanyUserFacadeInterface
      * - Uses `CompanyUserCriteriaFilterTransfer.customerName` to filter by customer first or last name (case-insensitive partial match).
      * - Uses `CompanyUserCriteriaFilterTransfer.isActive` to filter by company user active status.
      * - Uses `CompanyUserCriteriaFilterTransfer.includeAnonymizedCustomers` to include or exclude anonymized customers.
+     * - Uses `CompanyUserCriteriaFilterTransfer.uuid` to filter by company user UUID.
+     * - Uses `CompanyUserCriteriaFilterTransfer.idCompanyBusinessUnit` to filter by specific company business unit ID.
+     * - Uses `CompanyUserCriteriaFilterTransfer.customerReferences` to filter by multiple customer references.
+     * - Combines all filters with AND.
+     * - Uses `CompanyUserCriteriaFilterTransfer.sortCollection` to order the result, applying every
+     *   entry in the given order so several sort fields can be combined. Each `SortTransfer.field`
+     *   is resolved through `CompanyUserConfig::getCompanyUserCollectionSortableFieldMap()`; an
+     *   entry whose field is not in that map is ignored.
      * - Uses `CompanyUserCriteriaFilterTransfer.filter` for generic filtering options.
+     * - Uses `CompanyUserCriteriaFilterTransfer.filter.orderBy` to set the 'order by' column and
+     *   `CompanyUserCriteriaFilterTransfer.filter.orderDirection` to set ascending/descending order.
+     *   The column is verified against the columns of the tables this query touches and dropped when
+     *   it is not one of them; prefer `sortCollection` for caller-supplied sorting.
      * - Uses `CompanyUserCriteriaFilterTransfer.pagination` for paginated results.
+     * - Executes `CompanyUserHydrationPluginInterface` plugins on every returned company user.
      * - Returns `CompanyUserCollectionTransfer` containing filtered company user data.
      * - Returns empty collection if no company users match the criteria.
      *

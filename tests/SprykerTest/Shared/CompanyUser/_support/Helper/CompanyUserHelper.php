@@ -8,7 +8,9 @@
 namespace SprykerTest\Shared\CompanyUser\Helper;
 
 use Codeception\Module;
+use Exception;
 use Generated\Shared\DataBuilder\CompanyUserBuilder;
+use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Spryker\Zed\CompanyRole\Business\CompanyRoleFacadeInterface;
 use Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface;
@@ -42,6 +44,8 @@ class CompanyUserHelper extends Module
 
         $companyUserResponseTransfer = $this->createCompanyUserFacade()->create($companyUserTransfer);
 
+        $this->assertCompanyUserCreated($companyUserResponseTransfer);
+
         $companyUserTransfer = $companyUserResponseTransfer->getCompanyUser();
 
         if ($companyRoles) {
@@ -54,6 +58,33 @@ class CompanyUserHelper extends Module
         });
 
         return $companyUserTransfer;
+    }
+
+    /**
+     * A failed create still returns a company user, only without an ID - which every caller then
+     * feeds into role assignment and order fixtures, where it surfaces as a NOT NULL violation
+     * several calls later. Fail here, with the validation messages.
+     *
+     * @throws \Exception
+     */
+    protected function assertCompanyUserCreated(CompanyUserResponseTransfer $companyUserResponseTransfer): void
+    {
+        $companyUserTransfer = $companyUserResponseTransfer->getCompanyUser();
+
+        if ($companyUserResponseTransfer->getIsSuccessful() && $companyUserTransfer !== null && $companyUserTransfer->getIdCompanyUser() !== null) {
+            return;
+        }
+
+        $messages = [];
+
+        foreach ($companyUserResponseTransfer->getMessages() as $responseMessageTransfer) {
+            $messages[] = (string)$responseMessageTransfer->getText();
+        }
+
+        throw new Exception(sprintf(
+            'Failed to create a company user. Response messages: %s',
+            $messages ? implode('; ', $messages) : '(none)',
+        ));
     }
 
     public function assignCompanyRolesToCompanyUser(CompanyUserTransfer $companyUserTransfer): void
