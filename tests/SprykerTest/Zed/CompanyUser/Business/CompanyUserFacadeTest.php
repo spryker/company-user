@@ -65,6 +65,31 @@ class CompanyUserFacadeTest extends Unit
         $this->assertNotNull($foundCompanyUserTransfer->getIdCompanyUser());
     }
 
+    public function testCreateIgnoresSuppliedIdCompanyUserAndDoesNotOverwriteForeignCompanyUser(): void
+    {
+        // Arrange
+        $victimCompanyUserTransfer = $this->tester->createCompanyUserTransfer();
+        $attackerCompanyTransfer = $this->tester->haveCompany();
+        $companyUserTransfer = (new CompanyUserBuilder([
+            CompanyUserTransfer::ID_COMPANY_USER => $victimCompanyUserTransfer->getIdCompanyUser(),
+            CompanyUserTransfer::FK_COMPANY => $attackerCompanyTransfer->getIdCompany(),
+        ]))->withCustomer()->build();
+        $companyUserFacade = $this->tester->createCompanyUserFacade();
+
+        // Act
+        $companyUserResponseTransfer = $companyUserFacade->create($companyUserTransfer);
+
+        // Assert
+        $this->assertNotSame(
+            $victimCompanyUserTransfer->getIdCompanyUser(),
+            $companyUserResponseTransfer->getCompanyUser()->getIdCompanyUser(),
+        );
+        $this->assertSame(
+            $victimCompanyUserTransfer->getFkCompany(),
+            $companyUserFacade->getCompanyUserById($victimCompanyUserTransfer->getIdCompanyUser())->getFkCompany(),
+        );
+    }
+
     public function testCreateInitialCompanyUserShouldPersistCompanyUser(): void
     {
         // Assign
